@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: azure;">
+
+<div class="container">
+    <h2>Inventory</h2>
+</div>
+<div class="container" align="right">
+    <a class="btn btn-primary" href="http://localhost:8080/admin/">Admin page</a>
+</div>
+
+<div class="container">
+    <div align="left">
+        <input id="myInput" type="text" placeholder="Search.."/>
+    </div>
+    <p></p>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead style="background-color: lightgrey; color:black">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Cart</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr align="center" th:each="product:${listing}" th:object="${product}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{price}"></td>
+                <td th:text="*{quantity}"></td>
+                <td align="center">
+                    <form  action="#"  th:action="@{select/} + ${product.id}" th:object="${product}" method="post">
+                        <label for= "inputdefault">Number:</label>
+                        <input type="text" th:field="*{itemBuying}" id="inputdefault"/>
+                        <input class="btn btn-primary" value="add" type="submit"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container" align="right">
+    <form action="#" th:action="@{selected/} " method="get">
+        <input class="btn btn-danger" type="submit" value="All Added"/>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

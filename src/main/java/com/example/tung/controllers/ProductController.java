@@ -2,6 +2,7 @@ package com.example.tung.controllers;
 
 import com.example.tung.models.Product;
 import com.example.tung.services.ProductService;
+import com.example.tung.services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productService;
 
     @GetMapping("/")
     public String list(Model model, Product product) {

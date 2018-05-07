@@ -3,10 +3,11 @@ package com.example.tung.services;
 import com.example.tung.models.Product;
 import com.example.tung.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
