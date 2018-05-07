@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: azure">
+
+<div class="container">
+    <h2>Admin</h2>
+</div>
+<div class="container">
+    <div align="left">
+        <input id="myInput" type="text" placeholder="Search.."/>
+        <input class="btn btn-danger" value="Search" type="submit"/>
+    </div>
+</div>
+<p></p>
+<div class="container">
+    <a class="btn btn-primary" href="http://localhost:8080/add/">Add new product</a>
+</div>
+<p></p>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead style="background-color: lightgrey; color:black">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr align="center" th:each="product:${productList}" th:object="${product}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{quantity}"></td>
+                <td th:text="*{price}"></td>
+                <td>
+                    <form action="#" th:action="@{delete/} + *{id}" method="post">
+                        <input class="btn btn-danger" value="Delete" type="submit"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{edit/} + *{id}" method="get">
+                        <input class="btn btn-default" type="submit" value="Edit"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

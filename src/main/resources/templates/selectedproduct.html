@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: azure;">
+
+<div class="container">
+    <h2>Bordered Table</h2>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead style="background-color: lightgrey; color:black">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr align="center" th:each="product:${selectedList}" th:object="${product}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{itemBuying}"></td>
+                <td th:text="*{price} + ' Ft'"></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div class="container">
+    <h4 align="right" th:text="'Total Price: '+ ${totalPrice} +' Ft'"></h4>
+</div>
+<div align="right" class="container">
+    <form action="#" th:action="@{/buy} " method="get">
+        <input class="btn btn-danger" type="submit" value="Buy"/>
+    </form>
+</div>
+</body>
+</html>
