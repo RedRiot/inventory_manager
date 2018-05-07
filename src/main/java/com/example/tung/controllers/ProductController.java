@@ -38,13 +38,23 @@ public class ProductController {
     public String selectedList(Model model) {
         List<Product> selectedList = productService.selected();
         int totalPrice = 0;
-        for (Product product:selectedList) {
+        for (Product product : selectedList) {
             totalPrice = totalPrice + product.totalPriceforOneKindOfProduct();
         }
-        
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("selectedList", selectedList);
 
         return "SelectedProduct";
+    }
+
+    @GetMapping(value = "/buy")
+    public String returnToMainPage(Model model) {
+        List<Product> selectedList = productService.selected();
+        for (Product product : selectedList) {
+            product.decreaseQuantity();
+            product.setItemBuying(0);
+            productService.saveProduct(product);
+        }
+        return "redirect:/";
     }
 }

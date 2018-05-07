@@ -65,7 +65,7 @@ public class Product {
         this.itemBuying = itemBuying;
     }
 
-    public Integer decreaseQuantit(){
+    public Integer decreaseQuantity(){
         return quantity = quantity - this.itemBuying;
 
     }
