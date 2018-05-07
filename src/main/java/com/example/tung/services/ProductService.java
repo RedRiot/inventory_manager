@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public interface ProductService {
     void saveProduct(Product product);
     void delete(Product Product);
